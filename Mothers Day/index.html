@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Mother's Day</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-pink: #ff8a8a;
+            --text-color: #4a4a4a;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            background-color: #fce4ec;
+        }
+
+        /* Animated Floral Background */
+        .animated-bg {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            z-index: -2;
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+                url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            animation: slowSway 25s infinite ease-in-out;
+        }
+
+        @keyframes slowSway {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(1deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .fixed-card {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            text-align: center;
+            backdrop-filter: blur(8px);
+            width: 100%;
+            height: 520px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .flexible-card {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            text-align: center;
+            backdrop-filter: blur(8px);
+            width: 100%;
+            height: auto;
+            margin: 20px 0;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .photo-frame {
+            width: 100%;
+            height: 350px;
+            background: #fff;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 6px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            margin: 10px 0;
+            color: var(--accent-pink);
+        }
+
+        .btn-next {
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-top: 10px;
+            z-index: 5;
+        }
+
+        /* Falling Hearts Animation */
+        .falling-heart {
+            position: fixed;
+            top: -10%;
+            color: #ff4d6d;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: -1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        /* Burst Heart Particles */
+        .heart-particle {
+            position: fixed;
+            color: #ff4d6d;
+            font-size: 22px;
+            pointer-events: none;
+            z-index: 1000;
+            animation: heartFloat 1.2s ease-out forwards;
+        }
+
+        @keyframes heartFloat {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0) rotate(45deg); opacity: 0; }
+        }
+
+        /* Envelope */
+        .envelope-container {
+            position: relative;
+            width: 250px;
+            height: 180px;
+            margin: 40px auto;
+            background: #fffdf5;
+            border-radius: 0 0 10px 10px;
+            cursor: pointer;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .flap {
+            position: absolute;
+            top: 0; width: 0; height: 0;
+            border-left: 125px solid transparent;
+            border-right: 125px solid transparent;
+            border-top: 100px solid #f2efd5;
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 3;
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 5px; left: 10px;
+            width: 230px; height: 160px;
+            background: white;
+            z-index: 2;
+            transition: transform 0.6s ease;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 20px; box-sizing: border-box;
+        }
+
+        .envelope-container.open .flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-container.open .letter { transform: translateY(-120px); z-index: 4; }
+
+        .hidden { display: none; }
+        .fade-in { animation: fadeIn 0.8s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div class="animated-bg"></div>
+
+<div class="container">
+    <div id="slides-section" class="fixed-card fade-in">
+        <div class="photo-frame">
+            <img id="main-photo" src="mom1.jfif" alt="Mom">
+        </div>
+        <h2 id="caption">Photo 1 of 6</h2>
+        <button class="btn-next" onclick="handleNext()">Next Memory →</button>
+    </div>
+
+    <div id="envelope-section" class="hidden">
+        <h2 style="text-align: center; text-shadow: 0 2px 10px rgba(255,255,255,0.8);">A message for Mame...</h2>
+        <div class="envelope-container" id="env" onclick="openLetter()">
+            <div class="flap"></div>
+            <div class="letter">
+                <p style="font-family: 'Dancing Script'; font-size: 1.2rem;">Tap to open my heart...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="message-section" class="flexible-card hidden fade-in">
+        <h2 style="font-size: 2.2rem;">Happy Mother's Day!</h2>
+        <div style="position: relative; z-index: 2;">
+            <p style="font-style: italic; line-height: 1.8; text-align: left; font-size: 1rem;">
+                Happy Mother’s Day, Mame💐🩷! A special day for a strong, loving, and hardworking mom like you hehe. I just want to thank you for all the sacrifices and efforts you do for us every single day, even when things get hard. I know hindi madali lahat ng responsibilities mo, but you still continue to do your best for our family, and I really appreciate that. I hope you achieve all your goals and dreams in life because you truly deserve all the good things and happiness.<br><br>
+
+                I am so happy and thankful na ikaw ang naging nanay ko in this lifetime hehehe. Thank you for always understanding, supporting, and loving me no matter what. Please know that I love you always and forever🫂. Sorry mader wala pa akong gift na maibibigay kasi parehas tayong malayo sa isa’t isa, kaya letter muna hahahaha. But I promise na babawi ako and we will celebrate this special day together soon 😁.
+                <br><br>
+                Stay safe and healthy always, mame. I miss you.🥹💓
+            </p>
+            <p style="font-family: 'Dancing Script'; font-size: 1.8rem; border-top: 1px solid #eee; padding-top: 20px; margin-top: 20px;">
+                — Love,<br>
+                Your one and only babygirl😚
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const images = ["mom1.jfif", "mom2.jfif", "mom3.jfif", "mom4.jfif", "mom5.jfif", "mom6.jfif"];
+    const captions = [
+        "Thinking of you today...",
+        "I love this memory of us.",
+        "You always know how to make me smile.",
+        "Thank you for your strength.",
+        "To the most beautiful person I know.",
+        "One last surprise for you..."
+    ];
+
+    let step = 0;
+
+    function containerHearts() {
+        const card = document.getElementById('slides-section');
+        const rect = card.getBoundingClientRect();
+        const numHearts = 15;
+
+        for (let i = 0; i < numHearts; i++) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart-particle');
+            
+            let startX, startY;
+            const side = Math.floor(Math.random() * 4);
+            
+            if (side === 0) { // Top
+                startX = rect.left + Math.random() * rect.width;
+                startY = rect.top;
+            } else if (side === 1) { // Right
+                startX = rect.right;
+                startY = rect.top + Math.random() * rect.height;
+            } else if (side === 2) { // Bottom
+                startX = rect.left + Math.random() * rect.width;
+                startY = rect.bottom;
+            } else { // Left
+                startX = rect.left;
+                startY = rect.top + Math.random() * rect.height;
+            }
+
+            heart.style.left = startX + 'px';
+            heart.style.top = startY + 'px';
+            
+            const tx = (Math.random() - 0.5) * 300;
+            const ty = (Math.random() - 0.5) * 300;
+            
+            heart.style.setProperty('--tx', `${tx}px`);
+            heart.style.setProperty('--ty', `${ty}px`);
+            
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1200);
+        }
+    }
+
+    // Function to create the falling background hearts
+    function createFallingHearts() {
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💗'; // You can use ❤️ or 🌸
+            heart.classList.add('falling-heart');
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s"; // 2-5 seconds
+            heart.style.opacity = Math.random();
+            heart.style.fontSize = Math.random() * 15 + 15 + "px";
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }, 300); // Create a heart every 300ms
+    }
+
+    function handleNext() {
+        containerHearts();
+        
+        step++;
+        if (step < images.length) {
+            document.getElementById('main-photo').src = images[step];
+            document.getElementById('caption').innerText = captions[step]; // Uses the specific caption text
+        } else {
+            document.getElementById('slides-section').classList.add('hidden');
+            document.getElementById('envelope-section').classList.remove('hidden');
+        }
+    }
+
+    function openLetter() {
+        document.getElementById('env').classList.add('open');
+        setTimeout(() => {
+            document.getElementById('envelope-section').classList.add('hidden');
+            document.getElementById('message-section').classList.remove('hidden');
+            document.body.style.overflowY = "auto";
+            createFallingHearts(); // Trigger the falling hearts here!
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
